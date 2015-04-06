@@ -1,14 +1,11 @@
 {
   "name": "qparser",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "description": "A parsing library intended to parse complex user input",
   "main": "qparser.js",
-  "scripts": {
-    "test": "mocha test.js"
-  },
   "repository": {
     "type": "git",
-    "url": "git://github.com/vne/qparser.git"
+    "url": "git://github.com/kilbot/qparser.git"
   },
   "keywords": [
     "user",
@@ -16,23 +13,28 @@
     "parsing",
     "query"
   ],
-  "author": "Vladimir Neverov <sanguini@gmail.com>",
-  "homepage": "https://github.com/vne/qparser/wiki",
+  "authors": [
+    "Vladimir Neverov <sanguini@gmail.com>",
+    "Paul Kilmurray <paul@kilbot.com.au>"
+  ],
+  "homepage": "https://github.com/kilbot/qparser",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vne/qparser/issues",
-    "email": "sanguini@gmail.com"
+    "url": "https://github.com/kilbot/qparser/issues"
   },
   "devDependencies": {
-    "assert": "~0.4.9",
-    "mocha": "~1.13.0",
-    "grunt": "~0.4.1",
-    "grunt-contrib-jshint": "~0.6.4",
-    "grunt-contrib-uglify": "~0.2.4",
-    "grunt-simple-mocha": "~0.4.0",
-    "grunt-markdown": "~0.4.0",
-    "grunt-natural-docs": "~0.1.1",
-    "grunt-mkdir": "~0.1.1",
-    "grunt-execute": "~0.1.5"
+    "chai": "^2.1.0",
+    "grunt": "^0.4.1",
+    "grunt-contrib-jshint": "^0.11.0",
+    "grunt-contrib-uglify": "^0.8.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-simple-mocha": "^0.4.0",
+    "jsdom": "^2.0.0",
+    "jshint-stylish": "^1.0.0",
+    "load-grunt-tasks": "^3.1.0",
+    "mocha": "^2.2.1"
+  },
+  "dependencies": {
+    "lodash": "^3.6.0"
   }
 }

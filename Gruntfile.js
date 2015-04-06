@@ -1,73 +1,52 @@
 module.exports = function(grunt) {
+
 	grunt.initConfig({
-		pkg: grunt.file.readJSON('package.json'),
+
+    watch: {
+      js: {
+        files: ['qparser.js'],
+        tasks: ['jshint', 'simplemocha']
+      },
+      test: {
+        files: ['tests/spec.js'],
+        tasks: ['simplemocha']
+      }
+    },
+
 		uglify: {
-			options: {
-				banner: '/*! <%= pkg.name %> <%= pkg.version %> // <%= grunt.template.today("dd.mm.yyyy") %> // <%= pkg.author %> // <%= pkg.homepage %> */\n'
-			},
 			build: {
 				src: 'qparser.js',
 				dest: 'qparser.min.js'
 			}
 		},
+
 		simplemocha: {
 			options: {
 				globals: ['should'],
 				timeout: 3000,
 				ignoreLeaks: false,
 				ui: 'bdd',
-				reporter: 'tap'
+				reporter: 'spec'
 			},
 			all: {
-				src: ["test.js"]
+				src: [
+          'tests/setup.js',
+          'tests/spec.js'
+        ]
 			}
 		},
-		markdown: {
-			all: {
-				expand: true,
-				src: '*.md',
-				dest: '.',
-				ext: '.html'
-			}
-		},
-		natural_docs: {
-			options: {
-				bin: '/usr/bin/naturaldocs',
-				inputs: ['./'],
-				excludes: ['node_modules/', 'assets/', 'junk/', 'ndoc/'],
-				format: 'HTML',
-				output: './doc/',
-				project: './ndoc',
 
-			},
-			sortjs: {
-
-			}
-		},
-		clean: {
-			docs: ["./ndoc/"]
-		},
-		mkdir: {
-			docs: {
-				options: {
-					create: ["./ndoc/"]
-				}
-			}
-		},
+    jshint: {
+      options: {
+        jshintrc: true,
+        reporter: require('jshint-stylish'),
+        verbose: true
+      },
+      files: ['qparser.js']
+    }
 
 	});
-	// grunt.loadNpmTasks('grunt-mkdir');
-	// grunt.loadNpmTasks('grunt-contrib-clean');
-	// grunt.loadNpmTasks('grunt-natural-docs');
-	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-simple-mocha');
 
-	grunt.loadNpmTasks('grunt-markdown');
-
-	grunt.registerTask('test', ['simplemocha']);
-	// grunt.registerTask('docs', ['mkdir', 'natural_docs', 'clean']);
-	grunt.registerTask('build', ['uglify', 'markdown']);
-	grunt.registerTask('benchmark', ["execute"]);
-
-	grunt.registerTask('default', ['test', 'build']);
+  require('load-grunt-tasks')(grunt);
+	grunt.registerTask('default', ['jshint', 'simplemocha', 'uglify', 'watch']);
 }
