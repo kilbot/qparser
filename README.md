@@ -1,5 +1,6 @@
 QParser
 =======
+[![Build Status](https://travis-ci.org/kilbot/qparser.svg)](https://travis-ci.org/kilbot/qparser)
 
 A parsing library intended to parse complex user input with logical operators, grouping, prefixes and flags.
 
