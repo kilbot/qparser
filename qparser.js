@@ -43,7 +43,7 @@ function matchRegex(character){
     'GROUP_CLOSE',
     'OR',
     'PREFIX',
-    'RANGE',
+    //'RANGE',
     'SPACES',
     'QUOTES',
     'FLAGS'

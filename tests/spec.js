@@ -42,38 +42,38 @@ describe('simple queries', function () {
       }]);
     });
 
-    it('should parse range arguments', function () {
-      qparser.parse('15-25').should.eql([{
-        type: 'range',
-        from: '15',
-        to: '25'
-      }]);
-    });
-
-    it('should parse left range arguments', function () {
-      qparser.parse('15-').should.eql([{
-        type: 'range',
-        from: '15',
-        to: ''
-      }]);
-    });
-
-    it('should parse right range arguments', function () {
-      qparser.parse('-25').should.eql([{
-        type: 'range',
-        from: '',
-        to: '25'
-      }]);
-    });
-
-    it('should parse prefixed range arguments', function () {
-      qparser.parse('pref:15-25').should.eql([{
-        type: 'prange',
-        prefix: 'pref',
-        from: '15',
-        to: '25'
-      }]);
-    });
+    //it('should parse range arguments', function () {
+    //  qparser.parse('15-25').should.eql([{
+    //    type: 'range',
+    //    from: '15',
+    //    to: '25'
+    //  }]);
+    //});
+    //
+    //it('should parse left range arguments', function () {
+    //  qparser.parse('15-').should.eql([{
+    //    type: 'range',
+    //    from: '15',
+    //    to: ''
+    //  }]);
+    //});
+    //
+    //it('should parse right range arguments', function () {
+    //  qparser.parse('-25').should.eql([{
+    //    type: 'range',
+    //    from: '',
+    //    to: '25'
+    //  }]);
+    //});
+    //
+    //it('should parse prefixed range arguments', function () {
+    //  qparser.parse('pref:15-25').should.eql([{
+    //    type: 'prange',
+    //    prefix: 'pref',
+    //    from: '15',
+    //    to: '25'
+    //  }]);
+    //});
 
     it('should parse string arguments with flags', function () {
       qparser.parse('+*/!#~abcdef').should.eql([{
@@ -244,7 +244,7 @@ describe('complex queries', function() {
     });
 
     it('should OR and AND complex arguments', function() {
-      qparser.parse('(!e:"abc def" #15-25)|(+q:"qwe rty" simple)').should.eql([
+      qparser.parse('(!e:"abc def" #15)|(+q:"qwe rty" simple)').should.eql([
         {
           type: "or",
           queries: [
@@ -259,9 +259,8 @@ describe('complex queries', function() {
                 },
                 {
                   flags: ["#"],
-                  type: "range",
-                  from: "15",
-                  to: "25"
+                  type: "string",
+                  query: "15"
                 }
               ]
             },
@@ -366,7 +365,7 @@ describe('complex queries', function() {
     });
 
     it('should OR complex terms in square braces', function() {
-      qparser.parse("[abc (+def e:10-15 p:qwe) rty]").should.eql([
+      qparser.parse("[abc (+def e:10 p:qwe) rty]").should.eql([
         {
           type: "or",
           queries: [
@@ -383,10 +382,9 @@ describe('complex queries', function() {
                   query: "def"
                 },
                 {
-                  type: "prange",
+                  type: "prefix",
                   prefix: "e",
-                  from: "10",
-                  to: "15"
+                  query: "10"
                 },
                 {
                   type: "prefix",
